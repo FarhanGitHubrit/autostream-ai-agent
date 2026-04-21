@@ -24,17 +24,21 @@ Type queries like:
 
 
 🧠 Architecture Explanation
-This project uses a modular architecture inspired by agent-based systems. Although lightweight, it follows principles similar to LangGraph workflows, where different components handle specific responsibilities such as intent detection, knowledge retrieval, and action execution.
 
-LangGraph-style design was chosen because it allows structured control over conversational flow, making it easier to manage multi-step interactions like lead collection. Instead of a single monolithic function, the logic is broken into smaller units like intent detection, RAG response, and tool execution.
+This project has a modular design that was inspired by systems based on agents. It is lightweight, but it works in a way that is similar to LangGraph workflows, where different parts are in charge of different tasks like finding information, executing actions, and detecting intent.
 
-State management is handled using a Python dictionary that persists user information across multiple conversation turns. This includes tracking user intent, lead capture stage, and collected details such as name, email, and platform. This ensures the chatbot can maintain context over 5–6 turns, which is essential for real-world conversational systems.
+I chose a LangGraph-style design because it lets you control the flow of conversation in a structured way, which makes it easier to handle multi-step interactions like collecting leads. Instead of one big function, the logic is split up into smaller pieces, such as intent detection, RAG response, and tool execution.
+
+
+A Python dictionary keeps track of user information across multiple conversation turns, which is how state management works. This includes keeping track of the user's intent, the lead capture stage, and the information that was collected, like their name, email address, and platform. This makes sure that the chatbot can keep track of what's going on over 5–6 turns, which is important for real-world
 
 
 📱 WhatsApp Integration (Using Webhooks)
-To integrate this AI agent with WhatsApp, a service like Twilio API can be used. Twilio provides a WhatsApp Business API that allows sending and receiving messages programmatically.
 
-When a user sends a message on WhatsApp, Twilio forwards the message to a backend server via a webhook (HTTP request). This webhook endpoint will contain the chatbot logic (our Python application). The server processes the incoming message, generates a response using the agent, and sends the reply back to the user via Twilio’s API.
+You can use a service like Twilio API to connect this AI agent to WhatsApp. You can send and receive messages through the WhatsApp Business API from Twilio.
+
+Twilio sends a message from WhatsApp to a backend server through a webhook (HTTP request) when the user sends it. The chatbot logic (our Python app) will be in this webhook endpoint. The server handles the incoming message, uses the agent to create a response, and then sends the response back to the user through Twilio's API.
+
 
 The flow works as follows:
 
